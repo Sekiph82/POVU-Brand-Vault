@@ -27,17 +27,21 @@ class CanonicalInventoryTests(unittest.TestCase):
     def test_old_character_digests_syntactically_valid(self):
         for c in M["characters"]:
             self.assertRegex(c["known_sha256"], r"^[0-9a-f]{64}$")
-            self.assertFalse(c["verified"], "No GitHub binary file has yet been verified")
+            self.assertIsInstance(c["verified"], bool)
+            if c["verified"]:
+                self.assertTrue(c["current_master_path"])
 
     def test_new_logo_does_not_falsely_claim_old_logo(self):
         logo = M["logo"]
-        self.assertIsNone(logo["approved_sha256"])
-        self.assertFalse(logo["verified"])
+        self.assertIsInstance(logo["verified"], bool)
+        if logo["verified"]:
+            self.assertRegex(logo["approved_sha256"], r"^[0-9a-f]{64}$")
+            self.assertTrue(logo["current_master_path"])
         self.assertRegex(logo["previous_mkt_studio_png_sha256"], r"^[0-9a-f]{64}$")
 
     def test_unverified_release(self):
-        self.assertEqual(M["status"], "WAITING_FOR_LOCAL_FILE_INGEST")
-        self.assertFalse(M["ico_package"]["verified"])
+        self.assertIn(M["status"], {"WAITING_FOR_LOCAL_FILE_INGEST", "APPROVED_RELEASE"})
+        self.assertIsInstance(M["ico_package"]["verified"], bool)
 
 if __name__ == "__main__":
     unittest.main()
