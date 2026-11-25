@@ -24,23 +24,26 @@ class CanonicalInventoryTests(unittest.TestCase):
         self.assertEqual(M["group_sheet"]["name"], "Bactro Gang")
         self.assertFalse(M["group_sheet"]["separate_villain"])
 
-    def test_old_character_digests_syntactically_valid(self):
+    def test_current_character_digests_when_imported(self):
         for c in M["characters"]:
-            self.assertRegex(c["known_sha256"], r"^[0-9a-f]{64}$")
             self.assertIsInstance(c["verified"], bool)
             if c["verified"]:
                 self.assertTrue(c["current_master_path"])
+                self.assertRegex(c["sha256"], r"^[0-9a-f]{64}$")
+            else:
+                self.assertIsNone(c["sha256"])
 
-    def test_new_logo_does_not_falsely_claim_old_logo(self):
+    def test_current_logo_digest_when_imported(self):
         logo = M["logo"]
         self.assertIsInstance(logo["verified"], bool)
         if logo["verified"]:
-            self.assertRegex(logo["approved_sha256"], r"^[0-9a-f]{64}$")
+            self.assertRegex(logo["sha256"], r"^[0-9a-f]{64}$")
             self.assertTrue(logo["current_master_path"])
-        self.assertRegex(logo["previous_mkt_studio_png_sha256"], r"^[0-9a-f]{64}$")
+        else:
+            self.assertIsNone(logo["sha256"])
 
     def test_unverified_release(self):
-        self.assertIn(M["status"], {"WAITING_FOR_LOCAL_FILE_INGEST", "APPROVED_RELEASE"})
+        self.assertIn(M["status"], {"WAITING_FOR_LOCAL_FILE_INGEST", "LOCAL_HASH_VERIFIED_AWAITING_GIT_PUSH", "APPROVED_RELEASE"})
         self.assertIsInstance(M["ico_package"]["verified"], bool)
 
 if __name__ == "__main__":
