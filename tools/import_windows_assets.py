@@ -59,7 +59,25 @@ def parse_file_arg(value, root, allow_dir=False):
         raise RuntimeError(f"File must be inside source folder: {p}")
     return p
 
-def ingest(source, logo_name, icons_name, publish, allow_public=False):
+def choose(label, candidates, source):
+    """Explicit user selection; never accept a filename guess as identity proof."""
+    candidates = sorted(set(candidates))
+    if not candidates:
+        raise RuntimeError("No candidates for " + label)
+    print("\nSELECT " + label)
+    for i, p in enumerate(candidates, 1):
+        print(f"  {i}. {p.relative_to(source)}")
+    while True:
+        raw = input("Enter file number (or Q to cancel): ").strip()
+        if raw.lower() == "q":
+            raise RuntimeError("Cancelled by owner")
+        if raw.isdigit() and 1 <= int(raw) <= len(candidates):
+            selected = candidates[int(raw)-1]
+            print("Selected:", selected)
+            return selected
+        print("Invalid selection; try again.")
+
+def ingest(source, logo_name, icons_name, publish, allow_public=False, review_source=False):
     if not source.is_dir():
         raise RuntimeError(f"LOCAL SOURCE MISSING: {source}. This tool must run on the owner's Windows computer.")
     originals = files_under(source)
@@ -68,23 +86,52 @@ def ingest(source, logo_name, icons_name, publish, allow_public=False):
         if p.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp"}:
             by_hash.setdefault(sha(p), []).append(p)
     records = []
+    revisions = []
+    used = set()
+    pictures = [p for p in originals if p.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp"}]
     for item in KNOWN["characters"]:
         candidates = by_hash.get(item["known_sha256"], [])
         if not candidates:
-            raise RuntimeError(f"CHARACTER MISSING OR CHANGED: {item['id']} sha256 {item['known_sha256']}")
-        records.append((item["id"], candidates[0], f"brand/characters/{item['id']}/{item['old_source_filename']}"))
-    group = [p for p in originals if "bactro" in p.name.lower() and "gang" in p.name.lower()]
+            print(f"CHARACTER MISSING OR CHANGED: {item['id']} historical SHA-256 {item['known_sha256']}")
+            if not review_source:
+                print("Available source images:")
+                for p in pictures:
+                    print(f"  {p.relative_to(source)}  SHA-256 {sha(p)}")
+                raise RuntimeError("No exact historical hash. Use --review-source to review and explicitly select the current owner original.")
+            p = choose(item["name"] + " (verify the actual character before selecting)", [p for p in pictures if p not in used], source)
+            actual = sha(p)
+            print("Historical SHA-256:", item["known_sha256"])
+            print("Selected SHA-256:  ", actual)
+            if input("Is this the correct current owner-approved original? Type YES: ").strip() != "YES":
+                raise RuntimeError("Character revision not approved")
+            revisions.append({"id": item["id"], "historical_sha256": item["known_sha256"], "selected_sha256": actual, "source_filename": p.name, "approval": "explicit_owner_selection"})
+        else:
+            p = candidates[0]
+            print(f"EXACT MATCH: {item['id']} -> {p.relative_to(source)}")
+        if p in used or any(sha(p) == sha(x) for x in used):
+            raise RuntimeError("Same image cannot represent multiple individual characters")
+        used.add(p)
+        filename = Path(item["old_source_filename"]).with_suffix(p.suffix.lower()).name
+        records.append((item["id"], p, f"brand/characters/{item['id']}/{filename}"))
+    group = [p for p in pictures if p not in used and "bactro" in p.name.lower() and "gang" in p.name.lower()]
     if len(group) != 1:
-        raise RuntimeError("Expected exactly one Bactro Gang group image, found: " + str([str(x) for x in group]))
+        if not review_source:
+            raise RuntimeError("Expected exactly one Bactro Gang group image, found: " + str([str(x) for x in group]))
+        group = [choose("Bactro Gang GROUP sheet (not an individual villain)", group or [p for p in pictures if p not in used], source)]
+    used.add(group[0])
     records.append(("BACTRO_GANG", group[0], f"brand/groups/bactro-gang/{group[0].name}"))
     logo = parse_file_arg(logo_name, source)
     icons = parse_file_arg(icons_name, source, allow_dir=True)
     if logo is None:
         opts = [p for p in originals if "povu" in p.name.lower() and "logo" in p.name.lower()
                 and p.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp", ".svg"}]
+        opts = [p for p in opts if p not in used]
         if len(opts) != 1:
-            raise RuntimeError("Select the exact NEW owner-approved logo using --logo relative/path. Candidates: " + str([str(x) for x in opts]))
-        logo = opts[0]
+            if not review_source:
+                raise RuntimeError("Select the exact NEW owner-approved logo using --logo relative/path. Candidates: " + str([str(x) for x in opts]))
+            logo = choose("NEW owner-approved POVU logo", opts or [p for p in pictures if p not in used], source)
+        else:
+            logo = opts[0]
     if icons is None:
         opts = [p for p in originals if p.suffix.lower() == ".zip" and
                 ("ico" in p.name.lower() or "icon" in p.name.lower())]
@@ -92,8 +139,15 @@ def ingest(source, logo_name, icons_name, publish, allow_public=False):
                     ("ico" in p.name.lower() or "icon" in p.name.lower()) and
                     any(f.suffix.lower() == ".ico" for f in files_under(p)))
         if len(opts) != 1:
-            raise RuntimeError("Select the original ICO ZIP, .ico or icon folder with --icons relative/path. Candidates: " + str([str(x) for x in opts]))
-        icons = opts[0]
+            if not review_source:
+                raise RuntimeError("Select the original ICO ZIP, .ico or icon folder with --icons relative/path. Candidates: " + str([str(x) for x in opts]))
+            icons = choose("original complete ICO package", opts or [p for p in originals if p.suffix.lower() in {".zip", ".ico"}], source)
+        else:
+            icons = opts[0]
+    if logo in used or any(sha(logo) == sha(p) for p in used):
+        raise RuntimeError("Logo cannot be a character or group sheet")
+    if sha(logo) in {KNOWN["logo"]["previous_mkt_studio_png_sha256"], KNOWN["logo"]["previous_mkt_studio_jpg_sha256"]}:
+        raise RuntimeError("Selected logo is the old Marketing Studio logo, not the requested new one")
     if logo.suffix.lower() not in {".png", ".svg", ".webp", ".jpg", ".jpeg"}:
         raise RuntimeError("Unsupported master logo extension")
     if not icons.is_dir() and icons.suffix.lower() not in {".zip", ".ico"}:
@@ -122,6 +176,12 @@ def ingest(source, logo_name, icons_name, publish, allow_public=False):
         raise RuntimeError("STOP: GitHub does not confirm the expected PUBLIC Vault. Check gh authentication and repository.")
     if not (ROOT / ".git").is_dir():
         raise RuntimeError("Run on locally cloned POVU-Brand-Vault Git repository")
+    if review_source:
+        print("\nSelected files (publicly downloadable after push):")
+        for asset_id, src, dest in records:
+            print(f"  {asset_id}: {src.relative_to(source)} -> {dest}")
+        if input("Approve these exact files for PUBLIC upload? Type PUBLISH: ").strip() != "PUBLISH":
+            raise RuntimeError("Cancelled before copying")
     for id, src, dest in records:
         copy_exact(src, ROOT / dest)
     if icons.suffix.lower() == ".zip":
@@ -141,7 +201,7 @@ def ingest(source, logo_name, icons_name, publish, allow_public=False):
                     raise RuntimeError("Refuse replacing existing icon: " + str(target))
                 if not target.exists():
                     target.write_bytes(content)
-    report = {"schema_version": "1.0", "status": "LOCAL_HASH_VERIFIED_AWAITING_GIT_PUSH", "assets": digest_list}
+    report = {"schema_version": "1.0", "status": "LOCAL_HASH_VERIFIED_AWAITING_GIT_PUSH", "assets": digest_list, "owner_approved_character_revisions": revisions}
     output = ROOT / "manifests" / "approved-release-local.json"
     if output.exists():
         raise RuntimeError("Refuse replacing prior manifest: " + str(output))
@@ -155,9 +215,10 @@ def main():
     a.add_argument("--icons", help="Exact owner-approved ICO ZIP or ICO file relative to source root")
     a.add_argument("--publish", action="store_true", help="Copy selected owner assets into the cloned Vault; does not push")
     a.add_argument("--allow-public-assets", action="store_true", help="Acknowledge that the designated artwork will be publicly downloadable")
+    a.add_argument("--review-source", action="store_true", help="Interactively review and explicitly approve changed historical source hashes; never silently substitute artwork")
     o = a.parse_args()
     try:
-        ingest(Path(o.source), o.logo, o.icons, o.publish, o.allow_public_assets)
+        ingest(Path(o.source), o.logo, o.icons, o.publish, o.allow_public_assets, o.review_source)
     except (RuntimeError, OSError, ValueError, zipfile.BadZipFile) as exc:
         print("BLOCKED:", exc, file=sys.stderr)
         sys.exit(2)
