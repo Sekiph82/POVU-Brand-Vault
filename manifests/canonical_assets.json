@@ -110,5 +110,7 @@
     "archive_path": null,
     "extracted_files": [],
     "verified": false
-  }
+  },
+  "source_registry_status": "DELETED_BY_OWNER_HISTORICAL_PROVENANCE_ONLY",
+  "current_source_authority": "Owner-approved originals in the specified local Windows folder; actual SHA-256 recorded after explicit approval. Historical hashes are comparison evidence only."
 }
