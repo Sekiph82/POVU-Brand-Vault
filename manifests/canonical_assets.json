@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "authority": "owner-original-byte-identical",
-  "status": "LOCAL_HASH_VERIFIED_AWAITING_GIT_PUSH",
+  "status": "APPROVED_RELEASE",
   "source_windows_folder": "C:\\Users\\sekip\\Desktop\\Character Reference Sheets\\Character Refence Sheets",
   "public_repo_warning": "Owner authorizes public upload of the designated nine masters, group, logo and icon package only; exclude confidential and unrelated files.",
   "characters": [
@@ -19,7 +19,7 @@
       "role": "hero",
       "current_master_path": "brand/characters/H_BUBBLES/2. Bubbles Character Reference Sheet.png",
       "verified": true,
-      "sha256": "e428aedca313fc05a4e43d1e62210b6cf3ecc495bdbf1ba58688e17a04ce092c"
+      "sha256": "111b24b061e6b78d2633460031628ee50dfaeee9e3bbefe8adc2613a444a0966"
     },
     {
       "id": "V_GREASY_GLOOP",
@@ -83,7 +83,7 @@
     "role": "ensemble-reference-only",
     "separate_villain": false,
     "current_master_path": "brand/groups/bactro-gang/Bactro Gang Characters Reference Sheet.png",
-    "sha256": "9993b88665be7121bad954bdb2ac48243be5244b00221eaf23e3fe6c852f2005",
+    "sha256": "be706de90e91c1e86d012eae07918ff4e0700f3cafa7974989d4dc9acab3abcb",
     "verified": true
   },
   "logo": {

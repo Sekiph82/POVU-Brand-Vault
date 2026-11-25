@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "status": "LOCAL_HASH_VERIFIED_AWAITING_GIT_PUSH",
+  "status": "APPROVED_RELEASE",
   "assets": [
     {
       "id": "H_FLUFFY",
@@ -13,8 +13,8 @@
       "id": "H_BUBBLES",
       "file": "brand/characters/H_BUBBLES/2. Bubbles Character Reference Sheet.png",
       "source_filename": "2. Bubbles Character Reference Sheet.png",
-      "sha256": "e428aedca313fc05a4e43d1e62210b6cf3ecc495bdbf1ba58688e17a04ce092c",
-      "bytes": 2347388
+      "sha256": "111b24b061e6b78d2633460031628ee50dfaeee9e3bbefe8adc2613a444a0966",
+      "bytes": 2181631
     },
     {
       "id": "V_GREASY_GLOOP",
@@ -69,8 +69,8 @@
       "id": "BACTRO_GANG",
       "file": "brand/groups/bactro-gang/Bactro Gang Characters Reference Sheet.png",
       "source_filename": "Bactro Gang Characters Reference Sheet.png",
-      "sha256": "9993b88665be7121bad954bdb2ac48243be5244b00221eaf23e3fe6c852f2005",
-      "bytes": 2414147
+      "sha256": "be706de90e91c1e86d012eae07918ff4e0700f3cafa7974989d4dc9acab3abcb",
+      "bytes": 2255325
     },
     {
       "id": "POVU_NEW_LOGO",
