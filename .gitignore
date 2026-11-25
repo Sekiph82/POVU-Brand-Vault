@@ -1,0 +1,8 @@
+# Local staging and original source never enter public Git by accident
+.vault-staging/
+.vault-reports/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
