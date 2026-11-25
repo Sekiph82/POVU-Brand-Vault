@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "authority": "owner-original-byte-identical",
-  "status": "WAITING_FOR_LOCAL_FILE_INGEST",
+  "status": "LOCAL_HASH_VERIFIED_AWAITING_GIT_PUSH",
   "source_windows_folder": "C:\\Users\\sekip\\Desktop\\Character Reference Sheets\\Character Refence Sheets",
   "public_repo_warning": "Owner authorizes public upload of the designated nine masters, group, logo and icon package only; exclude confidential and unrelated files.",
   "characters": [
@@ -9,93 +9,191 @@
       "id": "H_FLUFFY",
       "name": "Fluffy",
       "role": "hero",
-      "current_master_path": null,
-      "verified": false,
-      "sha256": null
+      "current_master_path": "brand/characters/H_FLUFFY/1. Fluffy Character Reference Sheet.png",
+      "verified": true,
+      "sha256": "96d6354ac3735a1d52d786009cf4348114f3f4451555e3886a27d7a414a2e1c5"
     },
     {
       "id": "H_BUBBLES",
       "name": "Bubbles",
       "role": "hero",
-      "current_master_path": null,
-      "verified": false,
-      "sha256": null
+      "current_master_path": "brand/characters/H_BUBBLES/2. Bubbles Character Reference Sheet.png",
+      "verified": true,
+      "sha256": "e428aedca313fc05a4e43d1e62210b6cf3ecc495bdbf1ba58688e17a04ce092c"
     },
     {
       "id": "V_GREASY_GLOOP",
       "name": "Greasy Gloop",
       "role": "villain",
-      "current_master_path": null,
-      "verified": false,
-      "sha256": null
+      "current_master_path": "brand/characters/V_GREASY_GLOOP/3. Greasy Gloop Character Reference Sheet.png",
+      "verified": true,
+      "sha256": "b240a974d38105a0e43a95a945065150eeed203e47656215d4dddf2853f479ef"
     },
     {
       "id": "V_MUDZILLA",
       "name": "Mudzilla",
       "role": "villain",
-      "current_master_path": null,
-      "verified": false,
-      "sha256": null
+      "current_master_path": "brand/characters/V_MUDZILLA/4. Mudzilla Character Reference Sheet.png",
+      "verified": true,
+      "sha256": "717d97f53e7fcdee4a88427ad3992cf47f66ca2c35a8a3482a65a61aa9f70d53"
     },
     {
       "id": "V_STAINY_INK",
       "name": "Stainy Ink",
       "role": "villain",
-      "current_master_path": null,
-      "verified": false,
-      "sha256": null
+      "current_master_path": "brand/characters/V_STAINY_INK/5. Stainy Ink Character Reference Sheet.png",
+      "verified": true,
+      "sha256": "c86ae337ed2906dd368d36b9357d18c7a2bc9f841551258795bbefebc0598694"
     },
     {
       "id": "V_SMELLO",
       "name": "Smello",
       "role": "villain",
-      "current_master_path": null,
-      "verified": false,
-      "sha256": null
+      "current_master_path": "brand/characters/V_SMELLO/6. Smello Character Reference Sheet.png",
+      "verified": true,
+      "sha256": "742771716634dc9b823aa93b43116271a2128686498361bbd4461f72f586afec"
     },
     {
       "id": "V_CRAZY",
       "name": "Crazy",
       "role": "villain",
-      "current_master_path": null,
-      "verified": false,
-      "sha256": null
+      "current_master_path": "brand/characters/V_CRAZY/7. Crazy Character Reference Sheet.png",
+      "verified": true,
+      "sha256": "11d8c815e76a5051ef171eaeb5f2607b9ffd2e499d0b6a774e1b80050fd671b0"
     },
     {
       "id": "V_SNEAKY",
       "name": "Sneaky",
       "role": "villain",
-      "current_master_path": null,
-      "verified": false,
-      "sha256": null
+      "current_master_path": "brand/characters/V_SNEAKY/8. Sneaky Character Reference Sheet.png",
+      "verified": true,
+      "sha256": "6df7c6febc467f32cfa27b4297cb7d2ae3a54394f9ddfb847dd7391601021d47"
     },
     {
       "id": "V_LEADER",
       "name": "Leader",
       "role": "villain",
-      "current_master_path": null,
-      "verified": false,
-      "sha256": null
+      "current_master_path": "brand/characters/V_LEADER/9. Leader Character Reference Sheet.png",
+      "verified": true,
+      "sha256": "ad6eff0dbb361db7d353d10269e4d155aa8215db9eda1a37354159c3844545e8"
     }
   ],
   "group_sheet": {
     "name": "Bactro Gang",
     "role": "ensemble-reference-only",
     "separate_villain": false,
-    "current_master_path": null,
-    "sha256": null,
-    "verified": false
+    "current_master_path": "brand/groups/bactro-gang/Bactro Gang Characters Reference Sheet.png",
+    "sha256": "9993b88665be7121bad954bdb2ac48243be5244b00221eaf23e3fe6c852f2005",
+    "verified": true
   },
   "logo": {
     "role": "canonical-owner-logo",
-    "current_master_path": null,
-    "sha256": null,
-    "verified": false
+    "current_master_path": "brand/logos/POVU Logo.png",
+    "sha256": "d602bc995e34078ec034132171941c4b1307ced39b5b9b8b120cf590d9868acf",
+    "verified": true
   },
   "ico_package": {
-    "archive_path": null,
-    "extracted_files": [],
-    "verified": false
+    "archive_path": "brand/icons/POVU_Icon_Pack.zip",
+    "extracted_files": [
+      {
+        "id": "POVU_ICON_PACKAGE",
+        "file": "brand/icons/POVU_Icon_Pack.zip",
+        "source_filename": "POVU_Icon_Pack.zip",
+        "sha256": "d013ad30720c2ac31b8f35a150912d4a090a7c9d8f0c00e2ad979ec66f77de01",
+        "bytes": 2593587
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/favicon.ico",
+        "sha256": "b4f438c6fa40f949986cb538b0359009b14a32d4a236f27308441ce0e70d9697",
+        "bytes": 7033
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/POVU.ico",
+        "sha256": "cc27fe9c04c7a3aeafe11223f200263126f7e15e7f41604105c4fbcafc773cc5",
+        "bytes": 113475
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/POVU_Icon_1024.png",
+        "sha256": "6982ab8b149c0148075f08e262ea1f7fb5654361bfbf02d33d4a21540386bca8",
+        "bytes": 607527
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/POVU_Icon_128.png",
+        "sha256": "605eb7317d1dcaa06bbeee749000c95646a4db2f809b6d5aab389afdac110b51",
+        "bytes": 21069
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/POVU_Icon_16.png",
+        "sha256": "2c0b6363df8aa1a2b9901367be43c886158e348825858bc24271ddb3f638ede3",
+        "bytes": 739
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/POVU_Icon_180.png",
+        "sha256": "9e22dc9489fd72f3e8f22043d183de64ba5bf8e9be489e9c059c71573146c34a",
+        "bytes": 36588
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/POVU_Icon_192.png",
+        "sha256": "63e33bacaa0f4f93d2aa00225afec4ae71532b2999ab51b055b05af81d10066e",
+        "bytes": 40588
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/POVU_Icon_24.png",
+        "sha256": "278348b07b0f3f0114c3325c114e58c7484ae59235650786e9ad5ed668a4fe2b",
+        "bytes": 1385
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/POVU_Icon_256.png",
+        "sha256": "f2b452c8fe87b667d9d6bdbab6202b245982104fe85b97e847ae6fe8a29dbf94",
+        "bytes": 64343
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/POVU_Icon_32.png",
+        "sha256": "beba8f3ba8ae1f9b54a99c357f12654242d0887334ff345cd5c9c378f758031d",
+        "bytes": 2153
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/POVU_Icon_48.png",
+        "sha256": "d99ac132903ad6af3c963f01f4b1ef0af451e47d5f233bc7170dfe49507c560f",
+        "bytes": 4087
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/POVU_Icon_512.png",
+        "sha256": "534ca03720a711dd9bb21efe62ddb568b183f271e702e3b02cb7b226be48c514",
+        "bytes": 195981
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/POVU_Icon_64.png",
+        "sha256": "22d09e9d9d0795af62515ff5455bf3623e0a101e75df35e3839a0e226e559f80",
+        "bytes": 6585
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/POVU_Icon_96.png",
+        "sha256": "9afb23a947f509964e263abc81a87911011ac062d343a26fd347761f5c7d7d9f",
+        "bytes": 12980
+      },
+      {
+        "id": "POVU_ICON_EXTRACTED",
+        "file": "brand/icons/extracted/POVU_Logo_Original_Transparent.png",
+        "sha256": "1982dbf3ba2b9ceb9b585352f2873e543e2d052b28dff0c77d5ba3d38173ef91",
+        "bytes": 1487287
+      }
+    ],
+    "verified": true
   },
   "current_source_authority": "Only the designated owner Windows source folder. No external registry or historical digest comparison."
 }
