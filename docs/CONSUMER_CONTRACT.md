@@ -9,10 +9,10 @@
 - New POVU logo master and existing owner's complete ICO package are immutable bytes, including their transparency, proportions and original colors.
 
 ## Consumer responsibilities
-- Load approved release manifest and validate SHA-256 of each local asset before composition/render.
+- Load the release manifest derived exclusively from the designated owner folder and validate the fresh SHA-256 of each local asset before composition/render. Replace all existing POVU logos and icons with this release, retaining unrelated product branding.
 - Fail closed if file missing or changed. Never silently replace with AI-generated substitute.
 - Only the owner-designated character, group, logo and icon assets may be publicly distributed via the Vault. Consumers may pin these approved public assets by commit and SHA-256; never publish other confidential material.
-- In any future authorized POVU media project, render verified approved cutouts; keep storyboard/background generation separate. Former POVU-AI-Marketing-Studio was deleted by the owner and must not be treated as a dependency.
+- In any future authorized POVU media project, render verified approved cutouts; keep storyboard/background generation separate.
 - In FMCG ERP, update POVU logo, ERP frontend/favicon and POVU Shop PWA icons using actual icon package, checking sizes, transparency, service-worker caching and rollback.
 - In PackLab, place approved brand on product packaging and presentation mockups; preserve PackLab's own product identity and app icon.
 - For future projects, apply this contract only if the project genuinely uses POVU brand. FormuLab and unrelated games retain their own logos.
