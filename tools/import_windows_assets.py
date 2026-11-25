@@ -46,15 +46,15 @@ def verified_private():
     except (OSError, subprocess.SubprocessError):
         return False
 
-def parse_file_arg(value, root):
+def parse_file_arg(value, root, allow_dir=False):
     if not value:
         return None
     p = Path(value)
     if not p.is_absolute():
         p = root / p
     p = p.resolve()
-    if not p.is_file():
-        raise RuntimeError(f"Missing file: {p}")
+    if not p.is_file() and not (allow_dir and p.is_dir()):
+        raise RuntimeError(f"Missing file or directory: {p}")
     if root.resolve() not in p.parents:
         raise RuntimeError(f"File must be inside source folder: {p}")
     return p
@@ -78,7 +78,7 @@ def ingest(source, logo_name, icons_name, publish):
         raise RuntimeError("Expected exactly one Bactro Gang group image, found: " + str([str(x) for x in group]))
     records.append(("BACTRO_GANG", group[0], f"brand/groups/bactro-gang/{group[0].name}"))
     logo = parse_file_arg(logo_name, source)
-    icons = parse_file_arg(icons_name, source)
+    icons = parse_file_arg(icons_name, source, allow_dir=True)
     if logo is None:
         opts = [p for p in originals if "povu" in p.name.lower() and "logo" in p.name.lower()
                 and p.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp", ".svg"}]
@@ -88,18 +88,30 @@ def ingest(source, logo_name, icons_name, publish):
     if icons is None:
         opts = [p for p in originals if p.suffix.lower() == ".zip" and
                 ("ico" in p.name.lower() or "icon" in p.name.lower())]
+        opts.extend(p for p in source.rglob("*") if p.is_dir() and
+                    ("ico" in p.name.lower() or "icon" in p.name.lower()) and
+                    any(f.suffix.lower() == ".ico" for f in files_under(p)))
         if len(opts) != 1:
-            raise RuntimeError("Select the original ICO package with --icons relative/path. ZIP candidates: " + str([str(x) for x in opts]))
+            raise RuntimeError("Select the original ICO ZIP, .ico or icon folder with --icons relative/path. Candidates: " + str([str(x) for x in opts]))
         icons = opts[0]
     if logo.suffix.lower() not in {".png", ".svg", ".webp", ".jpg", ".jpeg"}:
         raise RuntimeError("Unsupported master logo extension")
-    if icons.suffix.lower() not in {".zip", ".ico"}:
-        raise RuntimeError("Use the original ICO package ZIP or .ico file")
+    if not icons.is_dir() and icons.suffix.lower() not in {".zip", ".ico"}:
+        raise RuntimeError("Use the original ICO package ZIP, .ico file or icon directory")
     records.append(("POVU_NEW_LOGO", logo, f"brand/logos/{logo.name}"))
-    records.append(("POVU_ICON_PACKAGE", icons, f"brand/icons/{icons.name}"))
+    if icons.is_dir():
+        icon_files = files_under(icons)
+        if not icon_files or not any(f.suffix.lower() == ".ico" for f in icon_files):
+            raise RuntimeError("Icon folder must include at least one .ico file")
+        for i, file in enumerate(icon_files):
+            if file.suffix.lower() not in ALLOWED_ICON_SUFFIXES:
+                raise RuntimeError("Unexpected icon package file: " + str(file))
+            records.append((f"POVU_ICON_{i+1}", file, "brand/icons/" + icons.name + "/" + file.relative_to(icons).as_posix()))
+    else:
+        records.append(("POVU_ICON_PACKAGE", icons, f"brand/icons/{icons.name}"))
     digest_list = [dict(id=id, file=dest, sha256=sha(src), bytes=src.stat().st_size) for id, src, dest in records]
-    if len(records) != 12:
-        raise RuntimeError("Expected nine characters, one group, logo and icon package")
+    if len(records) < 12:
+        raise RuntimeError("Expected nine characters, one group, logo and at least one icon file")
     print(json.dumps(dict(found=len(records), assets=digest_list), indent=2))
     if not publish:
         print("DRY RUN ONLY. Nothing copied or uploaded. Use --publish AFTER PRIVATE visibility verification.")
