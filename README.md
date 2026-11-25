@@ -17,3 +17,19 @@ The newest owner-approved POVU logo (transparent original) and its exact ICO pac
 Consumers: `POVU-AI-Marketing-Studio` (exact approved video cutouts), `PackLab` (product/label mockups, not replacement of PackLab's own app branding), `fmcg-erp-system` (POVU ERP/shop/PWA branding), and any *verified* POVU-branded future project. `FormuLab` has its own branding and must not be relabeled by mistake.
 
 See `TASKS.md` for pending owner-local import, verified release, and consumer migration. Never publish a video or approve a print artifact solely based on generated artwork.
+
+## Owner-local import procedure (Claude Code, Windows; no PowerShell installer)
+
+Open a Claude Code session in a clone of this Vault repository on the **same Windows machine** as the supplied source directory. The agent should first run:
+
+```text
+python tools/import_windows_assets.py
+python -m unittest discover -s tests -v
+```
+
+The importer runs read-only by default and reports all detected hashes. If the logo or ICO bundle is ambiguous, identify the owner's exact approved originals first and supply `--logo` and `--icons` as relative paths. ICO bundles can be ZIP archives, a single .ico, or a directory containing .ico and PNG variants.
+
+**Before** using `--publish`, change this GitHub repository to PRIVATE and independently verify the authenticated GitHub API reports `private: true`. The importer refuses to copy binary files into the repo otherwise. `--publish` performs local byte-preserving copies and produces a release audit manifest; the Claude agent must then explicitly inspect, commit and push the binaries and verify remote content hashes.
+
+Read `docs/CONSUMER_CONTRACT.md` and owner task tracker before updating Marketing Studio, PackLab or POVU ERP/Shop. Do not turn on expensive GitHub Actions.
+
