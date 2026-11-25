@@ -1,6 +1,6 @@
 # POVU Brand Vault
 
-Canonical, versioned POVU brand asset contract for **POVU Kenya**. This repository is currently **PUBLIC**; do **not** commit proprietary master character sheets, unapproved logo artwork, private product data or icon-pack binaries while public. Existing official nine character masters belong to `Sekiph82/POVU-AI-Marketing-Studio` (private) and the owner's local Windows folder. Canonical assets are byte-preserved; SHA-256 is checked before any use.
+Canonical, versioned POVU brand asset contract for **POVU Kenya**. Owner decision: this repository remains **PUBLIC**. Publication is authorized for the nine designated character masters, Bactro Gang group sheet, latest approved POVU logo and original icon package only. These files will be publicly downloadable. Never commit credentials, confidential product data or other unapproved files. Existing official nine character masters belong to `Sekiph82/POVU-AI-Marketing-Studio` (private) and the owner's local Windows folder. Canonical assets are byte-preserved; SHA-256 is checked before any use.
 
 ## Canonical brand
 
@@ -29,7 +29,7 @@ python -m unittest discover -s tests -v
 
 The importer runs read-only by default and reports all detected hashes. If the logo or ICO bundle is ambiguous, identify the owner's exact approved originals first and supply `--logo` and `--icons` as relative paths. ICO bundles can be ZIP archives, a single .ico, or a directory containing .ico and PNG variants.
 
-**Before** using `--publish`, change this GitHub repository to PRIVATE and independently verify the authenticated GitHub API reports `private: true`. The importer refuses to copy binary files into the repo otherwise. `--publish` performs local byte-preserving copies and produces a release audit manifest; the Claude agent must then explicitly inspect, commit and push the binaries and verify remote content hashes.
+Use `python tools/import_windows_assets.py --publish --allow-public-assets` after reviewing the dry run (and add `--logo`/`--icons` if selection is ambiguous). The importer verifies the expected PUBLIC repository; no visibility change is needed. It performs local byte-preserving copies and produces a release audit manifest; the Claude agent must then explicitly inspect, commit and push the binaries and verify remote content hashes.
 
 Read `docs/CONSUMER_CONTRACT.md` and owner task tracker before updating Marketing Studio, PackLab or POVU ERP/Shop. Do not turn on expensive GitHub Actions.
 
