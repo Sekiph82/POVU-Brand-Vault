@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Stage and (only after private-repository verification) publish the owner's exact POVU artwork.
+"""Stage the owner's exact POVU artwork for the owner-authorized PUBLIC Vault.
 Python standard library only. Never generates or changes a pixel.
 """
 import argparse
@@ -36,13 +36,13 @@ def copy_exact(src, dst):
     if sha(src) != sha(dst):
         raise RuntimeError(f"COPY HASH FAILURE: {src}")
 
-def verified_private():
+def verified_public():
     try:
         r = subprocess.run(
             ["gh", "api", "repos/Sekiph82/POVU-Brand-Vault", "--jq", ".private"],
             capture_output=True, text=True, timeout=25, check=True,
         )
-        return r.stdout.strip().lower() == "true"
+        return r.stdout.strip().lower() == "false"
     except (OSError, subprocess.SubprocessError):
         return False
 
@@ -59,7 +59,7 @@ def parse_file_arg(value, root, allow_dir=False):
         raise RuntimeError(f"File must be inside source folder: {p}")
     return p
 
-def ingest(source, logo_name, icons_name, publish):
+def ingest(source, logo_name, icons_name, publish, allow_public=False):
     if not source.is_dir():
         raise RuntimeError(f"LOCAL SOURCE MISSING: {source}. This tool must run on the owner's Windows computer.")
     originals = files_under(source)
@@ -114,10 +114,12 @@ def ingest(source, logo_name, icons_name, publish):
         raise RuntimeError("Expected nine characters, one group, logo and at least one icon file")
     print(json.dumps(dict(found=len(records), assets=digest_list), indent=2))
     if not publish:
-        print("DRY RUN ONLY. Nothing copied or uploaded. Use --publish AFTER PRIVATE visibility verification.")
+        print("DRY RUN ONLY. Nothing copied or uploaded. Use --publish --allow-public-assets for the owner-authorized public asset set.")
         return
-    if not verified_private():
-        raise RuntimeError("STOP: GitHub does NOT confirm POVU-Brand-Vault is PRIVATE. No binary upload permitted.")
+    if not allow_public:
+        raise RuntimeError("Public publication requires --allow-public-assets; only the designated owner artwork is authorized.")
+    if not verified_public():
+        raise RuntimeError("STOP: GitHub does not confirm the expected PUBLIC Vault. Check gh authentication and repository.")
     if not (ROOT / ".git").is_dir():
         raise RuntimeError("Run on locally cloned POVU-Brand-Vault Git repository")
     for id, src, dest in records:
@@ -151,10 +153,11 @@ def main():
     a.add_argument("--source", default=SOURCE_DEFAULT)
     a.add_argument("--logo", help="Exact newest owner-approved logo relative to source root")
     a.add_argument("--icons", help="Exact owner-approved ICO ZIP or ICO file relative to source root")
-    a.add_argument("--publish", action="store_true", help="Copy into cloned Vault ONLY after GitHub confirms private")
+    a.add_argument("--publish", action="store_true", help="Copy selected owner assets into the cloned Vault; does not push")
+    a.add_argument("--allow-public-assets", action="store_true", help="Acknowledge that the designated artwork will be publicly downloadable")
     o = a.parse_args()
     try:
-        ingest(Path(o.source), o.logo, o.icons, o.publish)
+        ingest(Path(o.source), o.logo, o.icons, o.publish, o.allow_public_assets)
     except (RuntimeError, OSError, ValueError, zipfile.BadZipFile) as exc:
         print("BLOCKED:", exc, file=sys.stderr)
         sys.exit(2)
