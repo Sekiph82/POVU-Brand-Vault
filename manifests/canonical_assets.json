@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "authority": "owner-original-byte-identical",
+  "status": "WAITING_FOR_LOCAL_FILE_INGEST",
+  "source_windows_folder": "C:\\Users\\sekip\\Desktop\\Character Reference Sheets\\Character Refence Sheets",
+  "public_repo_warning": "Do not push proprietary binary masters while repository is public",
+  "source_registry": "Sekiph82/POVU-AI-Marketing-Studio/brand/brand_registry.json",
+  "characters": [
+    {
+      "id": "H_FLUFFY",
+      "name": "Fluffy",
+      "role": "hero",
+      "old_source_filename": "01_Fluffy_SOURCE.png",
+      "known_sha256": "2897b8103290986c0416332c7489a4f9ac60eed424363dbff97dfdf3bc871e1b",
+      "current_master_path": null,
+      "verified": false
+    },
+    {
+      "id": "H_BUBBLES",
+      "name": "Bubbles",
+      "role": "hero",
+      "old_source_filename": "02_Bubbles_SOURCE.png",
+      "known_sha256": "6f58fdc1ab365bbeca4b4bea3cd2fb920fef131521a6e989c433ba81309c3b74",
+      "current_master_path": null,
+      "verified": false
+    },
+    {
+      "id": "V_GREASY_GLOOP",
+      "name": "Greasy Gloop",
+      "role": "villain",
+      "old_source_filename": "03_Greasy_Gloop_SOURCE.png",
+      "known_sha256": "6bf3326744d3388c07d7986e38a6601bc8be89a44b1d266c9c82ce9ef53e79e9",
+      "current_master_path": null,
+      "verified": false
+    },
+    {
+      "id": "V_MUDZILLA",
+      "name": "Mudzilla",
+      "role": "villain",
+      "old_source_filename": "04_Mudzilla_SOURCE.png",
+      "known_sha256": "c1498e6090e518ca3f58950d6f3507b0a98d372bb88e6903117ba6bc168d8a1a",
+      "current_master_path": null,
+      "verified": false
+    },
+    {
+      "id": "V_STAINY_INK",
+      "name": "Stainy Ink",
+      "role": "villain",
+      "old_source_filename": "05_Stainy_Ink_SOURCE.png",
+      "known_sha256": "93781fc6e4771f8ead62b8674bdb4b6ff2fff56901ea4d09a63cdb3f8fbeb318",
+      "current_master_path": null,
+      "verified": false
+    },
+    {
+      "id": "V_SMELLO",
+      "name": "Smello",
+      "role": "villain",
+      "old_source_filename": "06_Smello_SOURCE.png",
+      "known_sha256": "93d544f0f35c060e9a1a82e316c23e7737da9cd64944fd3e9eedce3ee2a4d9ca",
+      "current_master_path": null,
+      "verified": false
+    },
+    {
+      "id": "V_CRAZY",
+      "name": "Crazy",
+      "role": "villain",
+      "old_source_filename": "07_Crazy_SOURCE.png",
+      "known_sha256": "a3bf0cf226baf9b59ce8811f7309e93103a999f7ee6c21d054a549d4b13f8f47",
+      "current_master_path": null,
+      "verified": false
+    },
+    {
+      "id": "V_SNEAKY",
+      "name": "Sneaky",
+      "role": "villain",
+      "old_source_filename": "08_Sneaky_SOURCE.png",
+      "known_sha256": "ee0800c6604cb0b5c5a0c14f79166c36f3527b036d1f3d8b3e6d9921fb2188e4",
+      "current_master_path": null,
+      "verified": false
+    },
+    {
+      "id": "V_LEADER",
+      "name": "Leader",
+      "role": "villain",
+      "old_source_filename": "09_Leader_SOURCE.png",
+      "known_sha256": "acb4a324da7a659fca06955c40b4e8595f42a8a55e44b654a633097a8e736130",
+      "current_master_path": null,
+      "verified": false
+    }
+  ],
+  "group_sheet": {
+    "name": "Bactro Gang",
+    "role": "ensemble-reference-only",
+    "separate_villain": false,
+    "current_master_path": null,
+    "sha256": null,
+    "verified": false
+  },
+  "logo": {
+    "role": "canonical-new-logo",
+    "owner_source_sha256": null,
+    "approved_sha256": null,
+    "current_master_path": null,
+    "verified": false,
+    "previous_mkt_studio_png_sha256": "7b9bd06ab875f7460a1a7e0205343e85c1131f1a0fde3acfd18289e7edf131af",
+    "previous_mkt_studio_jpg_sha256": "20231967885ae74d2d8237bdd6d2cc463603afaacdc8a64fd49b323e437f4940",
+    "policy": "DO_NOT_TREAT_PREVIOUS_APPROVED_LOGO_AS_NEW_SOURCE"
+  },
+  "ico_package": {
+    "archive_path": null,
+    "extracted_files": [],
+    "verified": false
+  }
+}
