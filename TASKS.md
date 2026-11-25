@@ -4,10 +4,10 @@ All tasks are OPEN until backed by actual local-file evidence. This repository i
 
 ## BV-00 — Governance and source inspection
 - [x] BV-001: Establish repository and canonical 2 heroes + 7 villains inventory. Preserve a separate Bactro Gang group reference.
-- [x] BV-002: Record known character master SHA-256 values from the former POVU Marketing Studio registry (deleted by owner; historical provenance only), without claiming binary import.
+- [x] BV-002: Establish the designated Windows folder as the sole source of truth; remove all previous hash comparison requirements.
 - [ ] BV-003: Verify authenticated GitHub reports PUBLIC and record the owner-authorized asset scope; never change visibility.
-- [ ] BV-004: From the owner's local Windows worktree, inspect exactly `C:\Users\sekip\Desktop\Character Reference Sheets\Character Refence Sheets`; enumerate all master files and identify exact canonical transparent POVU logo and original ICO package; do not use outdated Marketing Studio logo. Report names, dimensions, hashes and duplicates.
-- [ ] BV-005: Record actual SHA-256 for each of the nine owner-approved local originals. Compare with historical checksums only for provenance; differences require explicit owner source approval, not recovery of a deleted repository. The 2026-11-25 Windows run reported H_FLUFFY did not match the historical hash; no binary was uploaded. The importer now supports --review-source for explicit owner selection and approval of a current original, records old and new SHA-256 separately, and requires PUBLISH before copying. If legacy cutouts are available locally, reconcile their source hashes; never silently mark them valid against a changed master. No deleted-repository dependency. Identify Bactro Gang ensemble as a **group image**, never an eighth villain.
+- [ ] BV-004: From the owner's local Windows worktree, inspect exactly `C:\Users\sekip\Desktop\Character Reference Sheets\Character Refence Sheets`; enumerate all master files and identify exact canonical transparent POVU logo and original ICO package. Report names, dimensions, hashes and duplicates.
+- [ ] BV-005: Record fresh SHA-256 for each of the nine current owner originals from the specified folder. Identify by filename and use --review-source only when selection is ambiguous; confirm the final list before copying. No comparison against previous hashes or files. Identify Bactro Gang ensemble as a **group image**, never an eighth villain.
 - [ ] BV-006: Verify latest owner-provided logo and ICO package as distinct artifacts; inspect alpha, geometry, icon sizes and ICO source hashes; never regenerate, crop, recolor, shadow, enhance or redraw. Confirm exact owner-selected version if multiple logo candidates exist.
 
 ## BV-01 — Canonical ingest and immutable source
@@ -17,7 +17,7 @@ All tasks are OPEN until backed by actual local-file evidence. This repository i
 - [ ] BV-013: Tests for missing file, truncated file, logo substitution, wrong villain count, Bactro count confusion, changed SHA, public publication scope gate and malformed ICO.
 
 ## BV-02 — Consumers and applications
-- [ ] BV-020: Future authorized POVU media consumers: consume the latest approved Vault logo, ICO pack and exact character masters/cutouts; verify checksums and maintain rollback. Former POVU-AI-Marketing-Studio deleted by owner; its specific integration is canceled, and no replacement repository is authorized by this task.
+- [ ] BV-020: Future authorized POVU media consumers: consume the latest approved Vault logo, ICO pack and exact character masters/cutouts; verify checksums and maintain rollback.
 - [ ] BV-021: FMCG ERP: replace only POVU identity surfaces (ERP header/logo, POVU Shop PWA manifest icons, favicon, apple-touch icon, logo references). Do not touch unrelated company/app branding. Require actual PNG/ICO visual QA on real browser layouts.
 - [ ] BV-022: PackLab: provide POVU brand in packaging/label/preview workflows, but DO NOT replace PackLab Studio's separate brand and `PackLab.ico`.
 - [ ] BV-023: Scan other accessible GitHub repositories for real POVU logo references; add consumer tasks only where verified. `FormuLab` and game brands must not be overwritten because they are the owner's other projects.
