@@ -3,7 +3,7 @@
   "authority": "owner-original-byte-identical",
   "status": "WAITING_FOR_LOCAL_FILE_INGEST",
   "source_windows_folder": "C:\\Users\\sekip\\Desktop\\Character Reference Sheets\\Character Refence Sheets",
-  "public_repo_warning": "Do not push proprietary binary masters while repository is public",
+  "public_repo_warning": "Owner authorizes public upload of the designated nine masters, group, logo and icon package only; exclude confidential and unrelated files.",
   "source_registry": "Sekiph82/POVU-AI-Marketing-Studio/brand/brand_registry.json",
   "characters": [
     {
