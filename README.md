@@ -1,12 +1,12 @@
 # POVU Brand Vault
 
-Canonical, versioned POVU brand asset contract for **POVU Kenya**. Owner decision: this repository remains **PUBLIC**. Publication is authorized for the nine designated character masters, Bactro Gang group sheet, latest approved POVU logo and original icon package only. These files will be publicly downloadable. Never commit credentials, confidential product data or other unapproved files. The owner's local Windows folder is the authoritative source for the nine current masters. The former `Sekiph82/POVU-AI-Marketing-Studio` repository was deleted by the owner; its previously recorded SHA-256 values are historical provenance only, not a live dependency. Canonical assets are byte-preserved; SHA-256 is checked before any use.
+Canonical, versioned POVU brand asset contract for **POVU Kenya**. Owner decision: this repository remains **PUBLIC**. Publication is authorized for the nine designated character masters, Bactro Gang group sheet, latest approved POVU logo and original icon package only. These files will be publicly downloadable. Never commit credentials, confidential product data or other unapproved files. The owner's local Windows folder is the authoritative source for the nine current masters. No other repository, previous logo or historical hash is used as an import reference. Compute new hashes solely from the designated folder to verify exact copies. Canonical assets are byte-preserved; SHA-256 is checked before any use.
 
 ## Canonical brand
 
 Heroes: `H_BUBBLES` (Bubbles), `H_FLUFFY` (Fluffy). Villains: `V_GREASY_GLOOP`, `V_MUDZILLA`, `V_STAINY_INK`, `V_SMELLO`, `V_CRAZY`, `V_SNEAKY`, `V_LEADER`. A separate **Bactro Gang** group sheet is an ensemble reference, **not an eighth villain**.
 
-The newest owner-approved POVU logo (transparent original) and its exact ICO package supersede the older 2026-10-16 marketing-studio logo **only after the new file has been individually fingerprinted and checked**. Never regenerate, recolor, shadow, flatten, crop, alter or redesign these masters.
+The newest owner-approved POVU logo (transparent original) and its exact ICO package are taken solely from that folder and individually fingerprinted. Never regenerate, recolor, shadow, flatten, crop, alter or redesign these masters.
 
 ## Ingestion status
 
@@ -27,9 +27,9 @@ python tools/import_windows_assets.py
 python -m unittest discover -s tests -v
 ```
 
-The importer runs read-only by default and reports all detected hashes. If the logo or ICO bundle is ambiguous, identify the owner's exact approved originals first and supply `--logo` and `--icons` as relative paths. ICO bundles can be ZIP archives, a single .ico, or a directory containing .ico and PNG variants.
+The importer runs read-only by default and reports all detected hashes. If any character, logo or ICO bundle name is ambiguous, use `--review-source` to select from the current folder and supply `--logo` and `--icons` as relative paths. ICO bundles can be ZIP archives, a single .ico, or a directory containing .ico and PNG variants.
 
-Use `python tools/import_windows_assets.py --publish --allow-public-assets` after reviewing the dry run (and add `--logo`/`--icons` if selection is ambiguous). The importer verifies the expected PUBLIC repository; no visibility change is needed. It performs local byte-preserving copies and produces a release audit manifest; the Claude agent must then explicitly inspect, commit and push the binaries and verify remote content hashes.
+Use `python tools/import_windows_assets.py --publish --allow-public-assets --review-source` after reviewing the dry run (and add `--logo`/`--icons` if selection is ambiguous). The importer verifies the expected PUBLIC repository; no visibility change is needed. It performs local byte-preserving copies and produces a release audit manifest; the Claude agent must then explicitly inspect, commit and push the binaries and verify remote content hashes.
 
 Read `docs/CONSUMER_CONTRACT.md` and owner task tracker before updating PackLab, POVU ERP/Shop or a future authorized POVU media project. Do not turn on expensive GitHub Actions.
 
